@@ -1,21 +1,23 @@
 import './css/styles.css';
 import debounce from 'lodash.debounce';
-import fetchCountries from 'fetchCountries.js';
+import { fetchCountries }  from './fetchCountries.js';
 
+    
+let name;
+const DEBOUNCE_DELAY = 300;
 
+const searchBoxInput = document.querySelector("#search-box");
 
+const getValueFromInput = debounce(function (el) {
+    console.log(el.target.value);
+    name = el.target.value;
+    console.log("Name is:", name);
+    fetchCountries(name);
+    
 
-// const DEBOUNCE_DELAY = 300;
+}, DEBOUNCE_DELAY);
 
-// const searchBoxInput = document.querySelector("#search-box");
-
-// const getValueFromInput = debounce(function (el) {
-//     console.log(el.target.value);
-//     return name = el.target.value;
-
-// }, DEBOUNCE_DELAY);
-
-// searchBoxInput.addEventListener("input", getValueFromInput);
+searchBoxInput.addEventListener("input", getValueFromInput);
 
 // for test:
 // const fetchPokemonData = async () => {
@@ -32,12 +34,12 @@ import fetchCountries from 'fetchCountries.js';
 // fetchPokemonData();
 
 // for test:
-const fetchCountries = async () => {
-  return await fetch(
-    'https://restcountries.com/v3.1/name/{name}'
-  )
-    .then(response => response.JSON())
-    .then(data => console.log(data));
-};
-
-fetchCountries();
+// const fetchCountries = async () => {
+//   return await fetch('https://restcountries.com/v3.1/name/{name}')
+//     .then(response => response.JSON())
+//     .then(data => console.log(data));
+// };
+// function fetchCountries(name) {
+//   return fetch(`https://restcountries.com/v3.1/name/${name}`);
+// }
+// fetchCountries(argen);
