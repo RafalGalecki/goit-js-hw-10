@@ -14,12 +14,15 @@ function fetchCountries(name) {
     })
     .then(data => {
       let dataLength = data.flatMap(el => el.name).length;
-      console.log('Typ danych:', typeof dataLength);
+      console.log('Typ danych:', typeof(data));
       console.log('Data length:', dataLength, 'Data is:', data);
       if (dataLength > 10) {
         Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
+      }
+      if (dataLength > 1 && dataLength <= 10) {
+        console.log("Name is:", data.name);
       }
     })
     .catch(error => {
