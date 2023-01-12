@@ -60,7 +60,11 @@ function renderCountries(data) {
 function renderCountryDetails(data) {
   data.forEach(el => {
     const countryCapitalData = el.capital;
-    const countryPopulationData = el.population;
+    const countryPopulationData = el.population.toLocaleString('pl-PL', {
+      useGrouping: 'true',
+      // minimumFractionDigits: '2',
+      // maximumFractionDigits: '2',
+    });;
     const countryLanguagesData = Object.values(el.languages).join(", ");
     const countryCapitalElement = document.createElement('p');
     countryCapitalElement.textContent = `Capital: ${countryCapitalData}`;
