@@ -10,7 +10,7 @@ const searchBoxInput = document.querySelector("#search-box");
 
 const getValueFromInput = debounce(function (el) {
     console.log(el.target.value);
-    name = el.target.value;
+    name = (el.target.value).trim();
     console.log("Name is:", name);
     fetchCountries(name);
     
