@@ -1,23 +1,23 @@
+'use strict';
+
 import './css/styles.css';
 import debounce from 'lodash.debounce';
-import { fetchCountries }  from './fetchCountries.js';
+import Notiflix from 'notiflix';
+import { fetchCountries } from './fetchCountries.js';
 
-    
 let name;
-const DEBOUNCE_DELAY = 300;
+const DEBOUNCE_DELAY = 3000;
 
-const searchBoxInput = document.querySelector("#search-box");
+const searchBoxInput = document.querySelector('#search-box');
 
 const getValueFromInput = debounce(function (el) {
-    console.log(el.target.value);
-    name = (el.target.value).trim();
-    console.log("Name is:", name);
-    fetchCountries(name);
-    
-
+  console.log(el.target.value);
+  name = el.target.value.trim();
+  console.log('Name is:', name);
+  fetchCountries(name);
 }, DEBOUNCE_DELAY);
 
-searchBoxInput.addEventListener("input", getValueFromInput);
+searchBoxInput.addEventListener('input', getValueFromInput);
 
 // for test:
 // const fetchPokemonData = async () => {
