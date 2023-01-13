@@ -3,7 +3,9 @@
 import Notiflix from 'notiflix';
 
 const countryList = document.querySelector('.country-list');
+let countryListElements = countryList.children;
 const countryInfo = document.querySelector('.country-info');
+let countryInfoElements = countryInfo.children;
 
 function fetchCountries(name) {
   fetch(
@@ -25,6 +27,7 @@ function fetchCountries(name) {
         );
       }
       if (dataLength <= 10) {
+        //refreshRendering();
         renderCountries(data);
         if (dataLength === 1) {
           renderCountryDetails(data);
@@ -47,9 +50,16 @@ const renderCountryWithFlag = singleCountryData => {
   countryList.appendChild(countryListElement);
   countryListElement.appendChild(countryFlag);
   countryListElement.appendChild(countryName);
+  for (element of countryListElements) {
+    element.classList.add('marker');
+  }
+  // countryListElements.forEach((el) => {
+  //   countryListElement[el].classList.add('.marker');
+  // });
 };
 
 function renderCountries(data) {
+  refreshRendering();
   data.forEach(el => {
     console.log(el.flags.svg);
     console.log(el.name.official);
@@ -58,24 +68,45 @@ function renderCountries(data) {
 }
 
 function renderCountryDetails(data) {
+  refreshRendering();
   data.forEach(el => {
     const countryCapitalData = el.capital;
     const countryPopulationData = el.population.toLocaleString('pl-PL', {
       useGrouping: 'true',
       // minimumFractionDigits: '2',
       // maximumFractionDigits: '2',
-    });;
-    const countryLanguagesData = Object.values(el.languages).join(", ");
+    });
+    const countryLanguagesData = Object.values(el.languages).join(', ');
     const countryCapitalElement = document.createElement('p');
+    //countryCapitalElement.classList.add(".marker");
     countryCapitalElement.textContent = `Capital: ${countryCapitalData}`;
     const countryPopulationElement = document.createElement('p');
+    //countryPopulationElement.classList.add('.marker');
     countryPopulationElement.textContent = `Population: ${countryPopulationData}`;
     const countryLanguagesElement = document.createElement('p');
+    //countryLanguagesElement.classList.add('.marker');
     countryLanguagesElement.textContent = `Languages: ${countryLanguagesData}`;
     countryInfo.appendChild(countryCapitalElement);
     countryInfo.appendChild(countryPopulationElement);
     countryInfo.appendChild(countryLanguagesElement);
+    console.log(countryInfoElements);
+    for (element of countryInfoElements) {
+      element.classList.add('marker');
+    }
+    // countryInfoElements.forEach(el => {
+    //   el.classList.add('.marker');
+    // });
   });
+}
+
+function refreshRendering() {
+  elementToRemove = document.querySelectorAll('.marker');
+
+  if (elementToRemove.length > 1) {
+    for (let i = 0; i < elementToRemove.length; i++) {
+      elementToRemove[i].remove();
+    }
+  }
 }
 
 export { fetchCountries };

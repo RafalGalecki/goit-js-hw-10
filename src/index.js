@@ -6,6 +6,9 @@ import Notiflix from 'notiflix';
 import { fetchCountries } from './fetchCountries.js';
 
 let name;
+let elementToRemove;
+
+
 const DEBOUNCE_DELAY = 3000;
 
 const searchBoxInput = document.querySelector('#search-box');
@@ -18,6 +21,9 @@ const getValueFromInput = debounce(function (el) {
 }, DEBOUNCE_DELAY);
 
 searchBoxInput.addEventListener('input', getValueFromInput);
+//searchBoxInput.addEventListener('change', refreshRendering);
+
+
 
 // for test:
 // const fetchPokemonData = async () => {
