@@ -5,13 +5,13 @@ import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
 import { fetchCountries } from './fetchCountries.js';
 
+//variables
 let name;
 let elementToRemove;
-
-const DEBOUNCE_DELAY = 3000;
-
+const DEBOUNCE_DELAY = 300;
 const searchBoxInput = document.querySelector('#search-box');
 
+// Get input data written by user
 const getValueFromInput = debounce(function (el) {
   refreshRendering();
   console.log(el.target.value);
@@ -20,10 +20,10 @@ const getValueFromInput = debounce(function (el) {
   fetchCountries(name);
 }, DEBOUNCE_DELAY);
 
+// Input listener
 searchBoxInput.addEventListener('input', getValueFromInput);
 
-
-
+// Refresh rendered elements (if any)
 function refreshRendering() {
   elementToRemove = document.querySelectorAll('.marker');
 
@@ -33,30 +33,3 @@ function refreshRendering() {
     }
   }
 }
-
-//searchBoxInput.addEventListener('change', refreshRendering);
-
-// for test:
-// const fetchPokemonData = async () => {
-//   return await fetch(
-//     'https://api.pokemontcg.io/v2/cards?' +
-//       new URLSearchParams({
-//         pageSize: 50,
-//       })
-//   )
-//     .then(response => response.JSON())
-//     .then(data => console.log(data));
-// };
-
-// fetchPokemonData();
-
-// for test:
-// const fetchCountries = async () => {
-//   return await fetch('https://restcountries.com/v3.1/name/{name}')
-//     .then(response => response.JSON())
-//     .then(data => console.log(data));
-// };
-// function fetchCountries(name) {
-//   return fetch(`https://restcountries.com/v3.1/name/${name}`);
-// }
-// fetchCountries(argen);
