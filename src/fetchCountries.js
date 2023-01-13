@@ -27,7 +27,7 @@ function fetchCountries(name) {
         );
       }
       if (dataLength <= 10) {
-        //refreshRendering();
+        
         renderCountries(data);
         if (dataLength === 1) {
           renderCountryDetails(data);
@@ -59,7 +59,7 @@ const renderCountryWithFlag = singleCountryData => {
 };
 
 function renderCountries(data) {
-  refreshRendering();
+  //refreshRendering();
   data.forEach(el => {
     console.log(el.flags.svg);
     console.log(el.name.official);
@@ -68,7 +68,7 @@ function renderCountries(data) {
 }
 
 function renderCountryDetails(data) {
-  refreshRendering();
+  //refreshRendering();
   data.forEach(el => {
     const countryCapitalData = el.capital;
     const countryPopulationData = el.population.toLocaleString('pl-PL', {
@@ -99,14 +99,6 @@ function renderCountryDetails(data) {
   });
 }
 
-function refreshRendering() {
-  elementToRemove = document.querySelectorAll('.marker');
 
-  if (elementToRemove.length > 1) {
-    for (let i = 0; i < elementToRemove.length; i++) {
-      elementToRemove[i].remove();
-    }
-  }
-}
 
 export { fetchCountries };

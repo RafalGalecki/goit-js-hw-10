@@ -8,12 +8,12 @@ import { fetchCountries } from './fetchCountries.js';
 let name;
 let elementToRemove;
 
-
 const DEBOUNCE_DELAY = 3000;
 
 const searchBoxInput = document.querySelector('#search-box');
 
 const getValueFromInput = debounce(function (el) {
+  refreshRendering();
   console.log(el.target.value);
   name = el.target.value.trim();
   console.log('Name is:', name);
@@ -21,9 +21,20 @@ const getValueFromInput = debounce(function (el) {
 }, DEBOUNCE_DELAY);
 
 searchBoxInput.addEventListener('input', getValueFromInput);
+
+
+
+function refreshRendering() {
+  elementToRemove = document.querySelectorAll('.marker');
+
+  if (elementToRemove.length > 1) {
+    for (let i = 0; i < elementToRemove.length; i++) {
+      elementToRemove[i].remove();
+    }
+  }
+}
+
 //searchBoxInput.addEventListener('change', refreshRendering);
-
-
 
 // for test:
 // const fetchPokemonData = async () => {
