@@ -14,9 +14,9 @@ const searchBoxInput = document.querySelector('#search-box');
 // Get input data written by user
 const getValueFromInput = debounce(function (el) {
   refreshRendering();
-  console.log(el.target.value);
+
   name = el.target.value.trim();
-  console.log('Name is:', name);
+
   fetchCountries(name);
 }, DEBOUNCE_DELAY);
 

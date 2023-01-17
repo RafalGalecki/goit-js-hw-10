@@ -23,8 +23,6 @@ function fetchCountries(name) {
     .then(data => {
       let dataLength = data.flatMap(el => el.name).length;
 
-      console.log('Data is: ', data);
-
       if (dataLength > 10) {
         Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.'
@@ -39,7 +37,6 @@ function fetchCountries(name) {
       }
     })
     .catch(error => {
-      console.log('Error happens:', error);
       Notiflix.Notify.failure('Oops, there is no country with that name.');
     });
 }
@@ -86,7 +83,6 @@ function renderCountryDetails(data) {
     countryInfo.appendChild(countryCapitalElement);
     countryInfo.appendChild(countryPopulationElement);
     countryInfo.appendChild(countryLanguagesElement);
-    console.log(countryInfoElements);
 
     addMarkerClass(countryInfoElements);
   });
